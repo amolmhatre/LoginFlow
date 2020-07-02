@@ -1,12 +1,15 @@
 package com.amol.testlogin;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -70,8 +73,36 @@ public class HomePage extends AppCompatActivity {
             case R.id.logout:
                 finish();
                 return true;
+            case R.id.setting:
+                showTimeFragment();
+                return true;
+            case R.id.aboutUs:
+                showUpAboutUs();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**This will show a layout in toast message*/
+    void showUpAboutUs(){
+        LayoutInflater layoutInflater = getLayoutInflater();
+        View view = layoutInflater.inflate(R.layout.show_about_us,null);
+        Toast toast = new Toast(getApplicationContext());
+        toast.setView(view);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER,0,0);
+        toast.show();
+    }
+
+    /** The whole purpose of this is to show time fragment*/
+    void showTimeFragment(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        PopTime popTime = new PopTime();
+        popTime.show(fragmentManager,"Show Fragment");
+    }
+
+    void setTime(String time){
+        tvUsername.setText(time);
     }
 }

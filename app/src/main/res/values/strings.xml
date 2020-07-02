@@ -1,14 +1,22 @@
 <resources>
     <string name="app_name">TestLogin</string>
-    <string name="userProfile">User Profile</string>
-    <string name="home">Home</string>
-    <string name="settings">Settings</string>
-    <string name="logout">Logout</string>
-    <string name="search">Search</string>
+
+    <!-- Login screen string values -->
     <string name="password">Password</string>
     <string name="enterPassword">Enter Password</string>
     <string name="username">Username</string>
     <string name="enterUsername">Enter Username</string>
     <string name="login">Login</string>
+
+    <!-- Home screen menu items -->
+    <string name="userProfile">User Profile</string>
+    <string name="home">Home</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="search">Search</string>
+    <string name="aboutUs">About Us</string>
     <string name="welcome">Welcome</string>
+
+
+
 </resources>
