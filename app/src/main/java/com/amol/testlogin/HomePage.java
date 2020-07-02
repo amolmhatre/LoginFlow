@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -71,7 +73,7 @@ public class HomePage extends AppCompatActivity {
                 Toast.makeText(this,"You are at home screen", Toast.LENGTH_LONG).show();
                 return true;
             case R.id.logout:
-                finish();
+                logOutAlert();
                 return true;
             case R.id.setting:
                 showTimeFragment();
@@ -104,5 +106,26 @@ public class HomePage extends AppCompatActivity {
 
     void setTime(String time){
         tvUsername.setText(time);
+    }
+
+    /**Asks for confirmation before user logs out*/
+    void logOutAlert(){
+        //Delete sesion token and stored user credentials
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this,R.style.AlertDialog);
+        alertDialog.setTitle("Confirmation")
+                .setMessage("Are you sure, you want to Logout?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        tvUsername.setText("Welcome Back");
+                    }
+                }).show();
+
     }
 }
