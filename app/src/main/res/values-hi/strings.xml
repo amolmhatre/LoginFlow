@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Hindi, India (hi_IN) -->
+<resources>
+    <string name="app_name">टेस्ट ऍप</string>
+    <string name="userProfile">यूजर</string>
+    <string name="home">घर</string>
+    <string name="settings">सेटिंग</string>
+    <string name="logout">बाहर जायें</string>
+    <string name="search">ढूंढे</string>
+    <string name="password">पासवर्ड</string>
+    <string name="enterPassword">पासवर्ड डालीये</string>
+    <string name="username">नाम</string>
+    <string name="enterUsername">नाम डालीये</string>
+    <string name="login">लॉग इन</string>
+    <string name="welcome">सुस्वागतम</string>
+</resources>

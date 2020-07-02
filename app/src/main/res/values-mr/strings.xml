@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Marathi, India (mr_MR) -->
+<resources>
+    <string name="app_name">टेस्ट ऍप</string>
+    <string name="userProfile">यूजर</string>
+    <string name="home">घर</string>
+    <string name="settings">सेटिंग</string>
+    <string name="logout">बाहेर जा</string>
+    <string name="search">शोध</string>
+    <string name="password">पासवर्ड</string>
+    <string name="enterPassword">पासवर्ड टाका</string>
+    <string name="username">नाव</string>
+    <string name="enterUsername">नाव टाका</string>
+    <string name="login">लॉग इन</string>
+    <string name="welcome">सुस्वागतम</string>
+</resources>

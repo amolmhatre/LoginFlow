@@ -3,18 +3,23 @@ package com.amol.testlogin;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class HomePage extends AppCompatActivity {
 
     TextView tvUsername;
+    String TAG = "com.amol.testlogin/HomePage";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,23 +30,39 @@ public class HomePage extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         String username = extras.getString("username");
         String passcode = extras.getString("root");
-        if (!passcode.equals("toor")){
+        if (!passcode.equals("toor")){ /**Checking if user accessing homepahe is valid user and not a hacker*/
             finish();
         } else {
-            tvUsername.setText("Welcome "+username+" !!");
+            tvUsername.setText(getString(R.string.welcome)+" "+username+" !!");
         }
     }
 
+    /**Options on home screen*/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.homemenu, menu);
+        /**Search bar as additional menu item*/
+        SearchView searchView = (SearchView) menu.findItem(R.id.searchBar).getActionView();
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String searchQuery) {
+                Log.d(TAG, searchQuery); /**This query could be use to search through DB/collection/server*/
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
+        // Handle menu item selection
         switch (item.getItemId()) {
             case R.id.home:
                 Toast.makeText(this,"You are at home screen", Toast.LENGTH_LONG).show();
