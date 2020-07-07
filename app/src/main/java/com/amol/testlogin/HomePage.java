@@ -63,6 +63,7 @@ public class HomePage extends AppCompatActivity {
         }
         // By this time login is successfull, lets load recyclerview
         initImageBitmaps();
+        getProductResponse();
     }
 
     private void getProductResponse(){
