@@ -23,7 +23,17 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amol.testlogin.model.ProductModel;
+
 import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.internal.http.RequestLine;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by amolmhatre on 7/4/20
@@ -55,6 +65,26 @@ public class HomePage extends AppCompatActivity {
         initImageBitmaps();
     }
 
+    private void getProductResponse(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://nirvaacls.com/bombill_pages/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        RequestInterface requestInterface = retrofit.create(RequestInterface.class);
+        Call<List<ProductModel>> call = requestInterface.getProductJson();
+
+        call.enqueue(new Callback<List<ProductModel>>() {
+            @Override
+            public void onResponse(Call<List<ProductModel>> call, Response<List<ProductModel>> response) {
+                Log.d(TAG, "Success");
+            }
+
+            @Override
+            public void onFailure(Call<List<ProductModel>> call, Throwable t) {
+                Log.d(TAG, "Fail");
+            }
+        });
+    }
     /**Initiate Image URLS*/
     private void initImageBitmaps(){
         Log.d(TAG, "Preparing images");
@@ -134,6 +164,7 @@ public class HomePage extends AppCompatActivity {
         return true;
     }
 
+    /**Listener for menu options*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle menu item selection
