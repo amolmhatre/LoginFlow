@@ -20,6 +20,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions{
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -49,5 +54,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     //Picasso library for fetching images
     implementation 'com.squareup.picasso:picasso:2.71828'
-
+    //Logging interceptor
+    implementation("com.squareup.okhttp3:logging-interceptor:4.7.2")
 }

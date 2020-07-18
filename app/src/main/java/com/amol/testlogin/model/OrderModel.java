@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
  */
 
 
-public class ProductModel {
+public class OrderModel {
 
     @SerializedName("vendor_order_id")
     @Expose
@@ -39,7 +39,7 @@ public class ProductModel {
      * No args constructor for use in serialization
      *
      */
-    public ProductModel() {
+    public OrderModel() {
     }
 
     /**
@@ -53,7 +53,7 @@ public class ProductModel {
      * @param paymentStatus
      * @param transactionId
      */
-    public ProductModel(String vendorOrderId, String purchaseDate, String paymentStatus, String paymentMethod, String transactionId, String orderStatus, String grandTotal, String vendorName) {
+    public OrderModel(String vendorOrderId, String purchaseDate, String paymentStatus, String paymentMethod, String transactionId, String orderStatus, String grandTotal, String vendorName) {
         super();
         this.vendorOrderId = vendorOrderId;
         this.purchaseDate = purchaseDate;

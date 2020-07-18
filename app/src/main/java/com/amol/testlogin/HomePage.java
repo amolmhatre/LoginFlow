@@ -5,7 +5,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Context;
@@ -18,17 +17,16 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.amol.testlogin.model.ProductModel;
+import com.amol.testlogin.controller.ProductController;
+import com.amol.testlogin.controller.RequestInterface;
+import com.amol.testlogin.model.OrderModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.internal.http.RequestLine;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,7 +39,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HomePage extends AppCompatActivity {
 
     private static final String TAG = "HomePage";
-//    TextView tvUsername;
+    //Retrofit model
+    private ArrayList<OrderModel> list_productModel = new ArrayList<>();
     // Variables for recyclerview
     private ArrayList<String> list_productImageURL = new ArrayList<String>();
     private ArrayList<String> list_productNames = new ArrayList<String>();
@@ -52,17 +51,15 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-//        tvUsername = findViewById(R.id.tvUsername);
         Bundle extras = getIntent().getExtras();
         String username = extras.getString("username");
         String passcode = extras.getString("root");
         if (!passcode.equals("toor")){ /**Checking if user accessing homepage is valid user and not a hacker*/
             finish();
         } else {
-//            tvUsername.setText(getString(R.string.welcome)+" "+username+" !!");
+            Log.d(TAG,getString(R.string.welcome)+" "+username+" !!");
         }
         // By this time login is successfull, lets load recyclerview
-        initImageBitmaps();
         getProductResponse();
     }
 
@@ -72,16 +69,17 @@ public class HomePage extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         RequestInterface requestInterface = retrofit.create(RequestInterface.class);
-        Call<List<ProductModel>> call = requestInterface.getProductJson();
+        Call<List<OrderModel>> call = requestInterface.getProductJson();
 
-        call.enqueue(new Callback<List<ProductModel>>() {
+        call.enqueue(new Callback<List<OrderModel>>() {
             @Override
-            public void onResponse(Call<List<ProductModel>> call, Response<List<ProductModel>> response) {
-                Log.d(TAG, "Success");
+            public void onResponse(Call<List<OrderModel>> call, Response<List<OrderModel>> response) {
+                list_productModel = new ArrayList<>(response.body());
+                Log.d(TAG, "Success"+response.body().toString());
             }
 
             @Override
-            public void onFailure(Call<List<ProductModel>> call, Throwable t) {
+            public void onFailure(Call<List<OrderModel>> call, Throwable t) {
                 Log.d(TAG, "Fail");
             }
         });
@@ -206,7 +204,7 @@ public class HomePage extends AppCompatActivity {
     }
 
     void setTime(String time){
-//        tvUsername.setText(time);
+        Log.d(TAG,"Current time is: "+time);
     }
 
     /**Asks for confirmation before user logs out*/
@@ -224,7 +222,7 @@ public class HomePage extends AppCompatActivity {
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-//                        tvUsername.setText("Welcome Back");
+                        Log.d(TAG,"Welcome Back");
                     }
                 }).show();
 
